@@ -63,4 +63,10 @@ class UserControllerTest extends TestCase
             "password" => "rahasia"
         ])->assertRedirect("/");
     }
+
+    public function testLogoutGuest()
+    {
+        $this->post('/logout')
+            ->assertRedirect("/login");
+    }
 }
