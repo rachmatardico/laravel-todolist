@@ -45,4 +45,22 @@ class UserControllerTest extends TestCase
             ->assertRedirect("/")
             ->assertSessionMissing("user");
     }
+
+    public function testLoginPageForMember()
+    {
+        $this->withSession([
+            "user"  => "matt"
+        ])->get('/login')
+            ->assertRedirect("/");
+    }
+
+    public function testLoginPageForUserAlreadyLogin()
+    {
+        $this->withSession([
+            "user"  => "matt"
+        ])->post('/login', [
+            "user"  => "matt",
+            "password" => "rahasia"
+        ])->assertRedirect("/");
+    }
 }
